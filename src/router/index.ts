@@ -3,12 +3,26 @@ import {createRouter, createWebHistory} from 'vue-router'
 const routes = [
     {
         path: '/',
-        name: 'News',
-        component: () => import('../pages/page/index.vue'),
-        meta: {
-            layout: 'default',
-            requiresAuth: false,
-        },
+        name: 'Home',
+        component: () => import('../pages/MainPage.vue'),
+    },
+    {
+        path: '/post/:postId',
+        name: 'Post',
+        component: () => import('../pages/Post.vue') 
+    },
+    {
+        path: '/signin',
+        name: 'SingIn',
+        component: () => import('../pages/SingIn.vue'),
+        meta: {layout: 'Register'} 
+    },
+    {
+        path: '/createAccount',
+        name: 'CreateAccount',
+        component: () => import('../pages/CreateAccount.vue'),
+        meta: {layout: 'Register'}
+         
     },
 ]
 

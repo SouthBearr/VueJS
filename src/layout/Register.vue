@@ -1,11 +1,8 @@
-<script setup lang="ts">
-import { defineComponent } from 'vue'
-
-
+<script lang='ts' setup>
 </script>
 
 <template>
-    
+    <slot></slot>
 </template>
 
 <style lang="scss" scoped>
