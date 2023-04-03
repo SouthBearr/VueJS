@@ -14,7 +14,6 @@
   const getPosts = () => {
     getPostsAsync()
       .then((res) => {
-        console.log(res, "res post");
         indexStore.dataPost = res;
       })
       .catch((err) => {
@@ -25,7 +24,7 @@
 </script>
 
 <template>
-  <div v-for="post in indexStore.dataPost" :key="post._id" class="border-b w-1/2 h-full mt-8">
+  <div v-for="post in indexStore.dataPost" :key="post._id" class="border-b w-1/2 mb-5">
     <router-link @click="$router.push(post._id)" to="">
       <div
         class="bg-gradient-to-r from-cyan-500 to-blue-500 text-white p-2 flex items-center justify-center font-bold h-40"
