@@ -47,3 +47,4 @@
 </template>
 
 <style lang="scss" scoped></style>
+../api/news/index

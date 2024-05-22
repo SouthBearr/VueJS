@@ -6,24 +6,6 @@ const routes = [
         name: 'Home',
         component: () => import('../pages/MainPage.vue'),
     },
-    {
-        path: '/post/:postId',
-        name: 'Post',
-        component: () => import('../pages/Post.vue') 
-    },
-    {
-        path: '/signin',
-        name: 'SingIn',
-        component: () => import('../pages/SingIn.vue'),
-        meta: {layout: 'Register'} 
-    },
-    {
-        path: '/createAccount',
-        name: 'CreateAccount',
-        component: () => import('../pages/CreateAccount.vue'),
-        meta: {layout: 'Register'}
-         
-    },
 ]
 
 const router = createRouter({

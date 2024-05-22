@@ -1,9 +1,11 @@
 import {$axios} from "../axios";
 
-const getPostsAsync = () => {
+import type {INews} from '../../types/index'
+
+export const getNewsAsync = (page: number): Promise<INews> => {
     return new Promise((resolve, reject) => {
         $axios({
-            url: '/posts',
+            url: `/news/${page}`,
             method: 'GET'
         }) 
         .then((res) => {
@@ -14,5 +16,3 @@ const getPostsAsync = () => {
         })
     })
 }
-
-export {getPostsAsync}
