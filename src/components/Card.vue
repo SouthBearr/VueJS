@@ -1,31 +1,59 @@
 <script setup lang="ts">
-const props = defineProps<{
-    img: string
-    title: string
-    text: string
-    type: string
-}>()
+  import { computed, ref } from "vue";
+  import moment from "moment";
 
+  const props = defineProps<{
+    img: string;
+    title: string;
+    text: string;
+    type: string;
+    date: number;
+  }>();
+
+  const date = ref(moment.unix(props.date));
+
+  const getDay = computed(() => {
+    return date.value.date();
+  });
+
+  const getMounth = computed(() => {
+    return date.value.format("MMMM");
+  });
+
+  const getYear = computed(() => {
+    return date.value.year();
+  });
 </script>
 
 <template>
   <router-link to="" class="card">
-      <img v-if="props.img" :src="props.img" :alt="props.title" class="card_img" />
+    <img
+      v-if="props.img"
+      :src="props.img"
+      :alt="props.title"
+      class="card_img"
+    />
 
     <div class="card_content">
-
       <div>
+        <div class="card_date__wrapper">
+          <span class="card_date__day"> {{ getDay }} </span>
+          <div>
+            <p class="card_date__mounth">{{ getMounth }}</p>
+            <p class="card_date__year">{{ getYear }}</p>
+          </div>
+        </div>
+
         <h2 class="card_title">
-            {{props.title}}
+          {{ props.title }}
         </h2>
 
         <p class="card_text">
-            {{props.text}}
+          {{ props.text }}
         </p>
       </div>
-
-      <span class="card_badge"> {{ props.type }} </span>
     </div>
+    <span class="card_badge"> {{ props.type }} </span>
   </router-link>
 </template>
 
@@ -37,7 +65,7 @@ const props = defineProps<{
     min-height: 34.63rem;
     display: flex;
     flex-direction: column;
-
+    justify-content: space-between;
     border: 0.06rem solid #0f62fe;
     border-radius: 1rem;
   }
@@ -48,6 +76,7 @@ const props = defineProps<{
     justify-content: space-between;
     gap: 40px;
     padding: 0 2rem;
+    margin-top: 32px;
   }
 
   .card_img {
@@ -56,14 +85,12 @@ const props = defineProps<{
     border-radius: 1rem 1rem 0rem 0rem;
     width: 100%;
     object-fit: cover;
-    margin-bottom: 32px;
   }
 
   .card_title {
     font-size: 1.38rem;
     font-weight: 400;
     line-height: 120%;
-
     color: #0029a9;
   }
 
@@ -73,6 +100,13 @@ const props = defineProps<{
     line-height: 130%;
     margin-top: 16px;
     color: #222327;
+
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-height: 1.3em;
+    height: 3.9em;
   }
 
   .card_badge {
@@ -89,5 +123,28 @@ const props = defineProps<{
     min-width: 5.5rem;
     width: max-content;
     height: 1.75rem;
+    margin: 0 2rem 2rem 2rem;
+  }
+
+  .card_date__wrapper {
+    color: #a1a7b5;
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    line-height: 15px;
+    margin-bottom: 18px;
+  }
+
+  .card_date__day {
+    font-weight: 400;
+    font-size: 36px;
+  }
+
+  .card_date__mounth {
+  }
+
+  .card_date__year {
   }
 </style>

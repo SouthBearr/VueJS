@@ -1,13 +1,12 @@
 <script lang="ts" setup>
-  import { ref } from "vue";
+  import { computed, ref } from "vue";
   import MainBanner from "@/components/MainBanner.vue";
   import ButtonComponent from "@/components/ButtonComponent.vue";
   import Card from "@/components/Card.vue";
   import { getNewsAsync } from "../api/news/index";
   import type { INewsItems, INav } from "../types/index";
 
-
-  const navData = ref<INav>()
+  const navData = ref<INav>();
 
   const dataNews = ref<INewsItems[]>([]);
   const page = ref(1);
@@ -15,8 +14,7 @@
   const getNews = () => {
     getNewsAsync(page.value)
       .then((res) => {
-        console.log(res);
-        navData.value = res?.nav
+        navData.value = res?.nav;
         dataNews.value = res?.items;
       })
       .catch((err) => {
@@ -26,10 +24,9 @@
   };
   getNews();
 
-  
   const downloadMore = (_page: number) => {
-    page.value = _page
-  getNews();
+    page.value = _page;
+    getNews();
   };
 </script>
 
@@ -45,10 +42,16 @@
         :title="item?.name"
         :text="item?.previewText"
         :type="item?.type?.value"
+        :date="item?.date"
       />
     </section>
     <div class="download-more">
-      <button-component v-if="navData?.total > navData?.current" @click="downloadMore(navData?.total)"> Загрузить ещё </button-component>
+      <button-component
+        v-if="navData?.total > navData?.current"
+        @click="downloadMore(navData?.total)"
+      >
+        Загрузить ещё
+      </button-component>
     </div>
   </section>
 </template>
