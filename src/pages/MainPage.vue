@@ -24,8 +24,8 @@
   };
   getNews();
 
-  const downloadMore = (_page: number) => {
-    page.value = _page;
+  const downloadMore = () => {
+    page.value++;
     getNews();
   };
 </script>
@@ -45,10 +45,10 @@
         :date="item?.date"
       />
     </section>
-    <div class="download-more">
+    <div v-if="navData" class="download-more">
       <button-component
         v-if="navData?.total > navData?.current"
-        @click="downloadMore(navData?.total)"
+        @click="downloadMore"
       >
         Загрузить ещё
       </button-component>
